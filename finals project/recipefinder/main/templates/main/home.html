@@ -1,0 +1,24 @@
+<!-- templates/main/home.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let Them Cook: A Recipe Finder</title>
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+</head>
+<body class="index">
+    <header class="index">
+        <img src="{% static 'images/menu_image.jpeg' %}" alt="Recipe Image" class="header-image index">
+        <br><br><br>
+        <p>A WEBSITE THAT SUGGESTS RECIPES BASED ON YOUR AVAILABLE INGREDIENTS!</p>
+    </header>
+    <div class="button-container index">
+        <a href="{% url 'checklist' %}"><button class="index">Get Started!</button></a>
+    </div>
+    <footer class="index">
+        <p>&copy; 2024 Caitlyn Cunanan, Shannen Siy, Esha Tiu</p>
+    </footer>
+</body>
+</html>

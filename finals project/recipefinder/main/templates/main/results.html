@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Recipe Results</title>
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FBF4EF;
+        margin: 0;
+        padding: 0;
+    }
+    h2 {
+        text-align: center;
+        color: #D66049;
+        margin-top: 20px;
+    }
+    .results-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    .results-table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    .results-table th, .results-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    .results-table th {
+        background-color: #FBF4EF;
+    }
+    .results-table tr {
+        background-color: #ffffff;
+    }
+    .results-table tr:hover {
+        background-color: #edb7ad;
+    }
+    .results-table td a {
+        color: #D66049; /* Set the desired color */
+        text-decoration: none; /* Remove underline */
+    }
+    .results-table td a:hover {
+        color: #A63E2B; /* Darken color on hover */
+    }
+    .button-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .button-container button {
+        padding: 15px 30px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: #ffffff; /* White background */
+        color: #D66049; /* Text color */
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-transform: uppercase;
+    }
+    .button-container button:hover {
+        background-color: #D66049;
+        color: #ffffff;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .pagination a, .pagination span {
+        margin: 0 5px;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #D66049;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .pagination .current {
+        background-color: #D66049;
+        color: white;
+        border-color: #D66049;
+    }
+    .pagination a:hover {
+        background-color: #D66049;
+        color: white;
+    }
+   </style>
+</head>
+<body>
+  <h2>Recipe Results</h2>
+  <div class="results-container">
+      <table class="results-table">
+          <thead>
+              <tr>
+                  <th>Title</th>
+                  <th>Difficulty</th>
+                  <th>Cuisine</th>
+                  <th>Vegetarian</th>
+                  <th>Number of Ingredients Matched</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for recipe in page_obj %}
+              <tr>
+                  <td>
+                      {% if recipe.ID %}
+                          <a href="{% url 'recipe_detail' recipe.ID %}">{{ recipe.Title }}</a>
+                      {% else %}
+                          {{ recipe.Title }}
+                      {% endif %}
+                  </td>
+                  <td>{{ recipe.Level }}</td>
+                  <td>{{ recipe.Cuisine|default_if_none:"" }}</td>
+                  <td>{{ recipe.Vegetarian|yesno:"Yes,No" }}</td>
+                  <td>You have {{ recipe.num_matched_ingredients }} ingredient{% if recipe.num_matched_ingredients != 1 %}s{% endif %}</td>
+              </tr>
+          {% empty %}
+              <tr>
+                  <td colspan="5">No recipes found.</td>
+              </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+  </div>
+  <div class="pagination">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </div>
+  <div class="button-container">
+      <a href="{% url 'checklist' %}"><button>Back to Checklist</button></a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checklist</title>
+    <style>
+        /* Basic reset to ensure consistency across browsers */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            color: #333; /* Dark grey text color */
+            background-color: #FBF4EF;
+            padding: 20px;
+        }
+
+        /* General Header styling */
+        h2 {
+            text-align: center;
+            color: #D66049; /* Orange text color */
+            margin-bottom: 20px;
+        }
+
+        /* General Main content styling */
+        form {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #FBF4EF;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .columns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .column {
+            flex: 1 1 20%;
+            box-sizing: border-box;
+            margin: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .column h3 {
+            margin-top: 0;
+            color: #D66049; /* Orange text color */
+        }
+
+        .column label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .column input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .checkbox-column {
+            flex: 1 1 30%;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center; /* Center align text */
+        }
+
+        .section-header {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            text-align: center;
+            color: #D66049;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around; /* Center align options */
+        }
+
+        .option {
+            flex: 1 1 60%;
+            background-color: #ffffff; /* White background */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .option h4 {
+            color: #D66049; /* Orange text color */
+            margin-bottom: 10px;
+        }
+
+        .option select, .option input[type="checkbox"] {
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .column {
+                flex: 1 1 45%;
+            }
+
+            .checkbox-column {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .column {
+                flex: 1 1 100%;
+            }
+
+            .option {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* General Button container styling */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        /* General Button styling */
+        button {
+            background-color: #ffffff; /* White background */
+            color: #D66049; /* Text color */
+            padding: 15px 30px; /* Increased padding */
+            font-size: 16px; /* Larger font size */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 5px;
+            text-transform: uppercase;
+        }
+
+        /* General Button hover effect */
+        button:hover {
+            background-color: #D66049; /* Darker color on hover */
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="ingredients">
+   <h2>Check the boxes of ingredients that you have</h2>
+   <form method="post">
+       {% csrf_token %}
+       <div class="search-bar">
+           <input type="text" id="ingredientSearch" placeholder="Search for an ingredient">
+           <button type="button" onclick="searchIngredient()">Search</button>
+           <p id="message" style="color: #D66049;"></p>
+       </div>
+       <div class="columns">
+           <div class="column">
+               <h3>Vegetables</h3>
+               {% for field in ingredients_form.vegetables %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Fruits</h3>
+               {% for field in ingredients_form.fruits %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Grains & Cereals</h3>
+               {% for field in ingredients_form.grains_cereals %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Proteins</h3>
+               {% for field in ingredients_form.proteins %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Dairy Alternatives</h3>
+               {% for field in ingredients_form.dairy_alternatives %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Herbs & Spices</h3>
+               {% for field in ingredients_form.herbs_spices %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Oils & Fats</h3>
+               {% for field in ingredients_form.oils_fats %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Baking Ingredients</h3>
+               {% for field in ingredients_form.baking_ingredients %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Condiments and Sauces</h3>
+               {% for field in ingredients_form.condiments_sauces %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Nuts and Seeds</h3>
+               {% for field in ingredients_form.nuts_seeds %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Beverages</h3>
+               {% for field in ingredients_form.beverages %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="column">
+               <h3>Miscellaneous</h3>
+               {% for field in ingredients_form.miscellaneous %}
+                   {{ field }}
+               {% endfor %}
+           </div>
+           <div class="checkbox-column">
+               <div class="section-header">
+                   <h3>Sort your recipes further</h3>
+               </div>
+               <div class="options">
+                   <div class="option">
+                       <h4>Cuisine</h4>
+                       {% for field in filters_form.cuisine %}
+                           {{ field }}
+                       {% endfor %}
+                   </div>
+                   <div class="option">
+                       <h4>Vegetarian</h4>
+                       <div style="display: flex; justify-content: center; align-items: center;">
+                           {{ filters_form.vegetarian }}
+                       </div>
+                   </div>
+                   <div class="option">
+                       <h4>Difficulty</h4>
+                       {% for field in filters_form.difficulty %}
+                           {{ field }}
+                       {% endfor %}
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="button-container">
+           <button type="submit">Find Recipes</button>
+           <button type="button" onclick="uncheckAll()">Uncheck All</button>
+           <button type="button" onclick="window.location.href='/'">Home</button>
+       </div>
+   </form>
+
+
+   <script>
+       document.getElementById('ingredientSearch').addEventListener('keydown', function(event) {
+           if (event.key === 'Enter') {
+               event.preventDefault();
+               searchIngredient();
+           }
+       });
+
+
+       function uncheckAll() {
+           var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+           checkboxes.forEach(function(checkbox) {
+               checkbox.checked = false;
+           });
+       }
+
+
+       function searchIngredient() {
+           var searchTerm = document.getElementById('ingredientSearch').value.trim().toLowerCase();
+           var labels = document.querySelectorAll('label');
+           var messageElement = document.getElementById('message');
+           var ingredientFound = false;
+
+
+           labels.forEach(function(label) {
+               var checkbox = label.querySelector('input[type="checkbox"]');
+               var ingredientName = label.textContent.trim().toLowerCase();
+              
+               // Check for exact match of searchTerm with ingredientName
+               if (ingredientName === searchTerm) {
+                   checkbox.checked = true;
+                   ingredientFound = true;
+               }
+           });
+
+
+           // Display message based on search result
+           if (ingredientFound) {
+               messageElement.textContent = "Ingredient added.";
+           } else {
+               messageElement.textContent = "Ingredient not found.";
+           }
+       }
+   </script>
+</body>
+</html>
+

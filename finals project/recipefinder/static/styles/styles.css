@@ -1,0 +1,118 @@
+/* static/styles/styles.css */
+
+/* Basic reset to ensure consistency across browsers */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Body styling */
+body {
+    font-family: Arial, sans-serif;
+    color: #333; /* Dark grey text color */
+    padding: 20px;
+}
+
+/* General Header styling */
+header {
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* General Main content styling */
+main {
+    background-color: white; /* White background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* General Heading styling */
+h1 {
+    margin-bottom: 20px;
+}
+
+/* General Paragraph styling */
+p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* General Button container styling */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* General Button styling */
+button {
+    background-color: #ffffff; /* White background */
+    color: #D66049; /* Text color */
+    padding: 30px 50px; /* Increased padding */
+    font-size: 18px; /* Larger font size */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* General Button hover effect */
+button:hover {
+    background-color: #D66049; /* Darker color on hover */
+    color: #ffffff;
+}
+
+/* General Footer styling */
+footer {
+    background-color: #333; /* Dark grey background */
+    color: #ffffff; /* White text color */
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+/* Specific styling for index.html */
+body.index {
+    background-color: #FBF4EF; /* Beige background */
+}
+
+header.index {
+    background-color: #FBF4EF; /* Beige background */
+    color: #D66049; /* Orange text color */
+}
+
+.header-image.index {
+    margin-top: 10px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+main.index {
+    background-color: white; /* White background */
+}
+
+h1.index {
+    color: #D66049; /* Orange text color */
+}
+
+p.index {
+    color: #D66049; /* Orange text color */
+}
+
+.button-container.index {
+    gap: 50px; /* Space between buttons */
+}
+
+button.index:hover {
+    background-color: #D66049; /* Darker color on hover */
+    color: #ffffff;
+}
+
+footer.index {
+    background-color: #333; /* Dark grey background */
+    color: #ffffff; /* White text color */
+}
